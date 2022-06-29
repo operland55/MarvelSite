@@ -1,35 +1,97 @@
-import { useEffect, useState } from "react";
-import md5 from "md5";
+import Home from "./Pages/Home";
+import { createGlobalStyle } from "styled-components";
+import Pages from "./Pages/Pages";
+import Header from "./Components/Header";
+const GlobalStyle = createGlobalStyle`
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, menu, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+main, menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 24px;
+  font: inherit;
+  vertical-align: baseline;
+	font-family: "Fascinate", cursive;
+  
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, main, menu, nav, section {
+  display: block;
+}
+/* HTML5 hidden-attribute fix for newer browsers */
+*[hidden] {
+    display: none;
+}
+body {
+  line-height: 1;
+  font-size: 24px;  
+  background-color: red;
+}
+menu, ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+* {
+  box-sizing: border-box;
+}
+a {
+  text-decoration:none;
+  color: inherit;
+}
+h1{
+  font-size: 60px;
+}
+h2{
+
+  font-size: 48px;
+}
+h3{
+
+  font-size: 36px;
+}
+h4{
+  
+  font-size: 30px;
+}
+h5{
+
+  font-size: 24px;
+}
+h6{
+
+  font-size: 18px;
+}
+`;
 function App() {
-	const [count, setCount] = useState([]);
-	const populic = "caa49ff91d303d668440678b64c5d9ee";
-	const api = `a1555a12f90da8b7f7b3c2db2c64c5043cd92b8f`;
-	// const hash = "a6dd2fae7926a00f97ac7206e7e676ef";
-	const time = Number(new Date());
-
-	const hash = md5(time + api + populic);
-
-	// 19a1555a12f90da8b7f7b3c2db2c64c
-	// 5043cd92b8fcaa49ff91d303d668440678b64c5d9ee
-	// 1655111640145a1555a12f90da8b7f7b3c2db2c64c5043cd92b8fcaa49ff91d303d668440678b64c5d9ee
-	// 1caa49ff91d303d668440678b64c5d9eea1555a12f90da8b7f7b3c2db2c64c5043cd92b8f
-	const getMarvel = async () => {
-		const getApi = await fetch(
-			`http://gateway.marvel.com/v1/public/characters?ts=${time}&apikey=caa49ff91d303d668440678b64c5d9ee&hash=${hash}`
-		);
-		const data = await getApi.json();
-		setCount(data);
-	};
-
-	useEffect(() => {
-		getMarvel();
-		console.log(count);
-	}, []);
-
-	console.log(count);
 	return (
 		<div className="App">
-			<div></div>
+			<GlobalStyle />
+	
+			<Pages />
 		</div>
 	);
 }
